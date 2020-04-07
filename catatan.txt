@@ -1,0 +1,4 @@
+catatan yang diinstall
+-untuk mengeluarkan icon create dll
+npm install --save material-design-icons-iconfont
+lalu import ini di main.js
