@@ -8,7 +8,7 @@
 
       <v-spacer></v-spacer>
 
-      <router-link  to="home">
+      <router-link  to="/">
         <v-btn icon>
           <v-icon>mdi-home</v-icon>
         </v-btn>

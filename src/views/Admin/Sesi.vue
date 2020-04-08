@@ -117,6 +117,9 @@
         </thead>
         <tbody>
           <tr>
+            <td>Sesi 1</td>
+            <td>13 Maret 2020</td>
+            <td>14 Maret 2020</td>
             <td>
               <v-btn icon>
                 <v-icon>mdi-pencil</v-icon>

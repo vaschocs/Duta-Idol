@@ -14,7 +14,7 @@
                 <v-dialog v-model="dialog" persistent max-width="600px">
                   <template v-slot:activator="{ on }">
                     <v-btn icon color="primary" dark v-on="on">
-                      <v-icon>mdi-pencil</v-icon>
+                      <v-icon>mdi-plus</v-icon>
                     </v-btn>
                   </template>
                   <v-card>
@@ -76,6 +76,10 @@
                   <td>{{ user.password }}</td>
                   <td>{{ user.status }}</td> -->
           <tr>
+            <td>009</td>
+            <td>James Alexander</td>
+            <td>jamesal@gmail.com</td>
+            <td>AUDISI</td>
             <td>
               <b-link href="#foo">Edit </b-link>
               |
