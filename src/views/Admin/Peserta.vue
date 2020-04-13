@@ -1,94 +1,92 @@
 <template>
   <v-app>
-    <v-simple-table>
-      <template v-slot:default>
-        <thead>
-          <tr>
-            <th class="text-left">ID</th>
-            <th class="text-left">Name</th>
-            <th class="text-left">Email</th>
-            <th class="text-left">Status</th>
-            <th class="text-left"></th>
-            <th>
-              <v-row justify="center">
-                <v-dialog v-model="dialog" persistent max-width="600px">
-                  <template v-slot:activator="{ on }">
-                    <v-btn icon color="primary" dark v-on="on">
-                      <v-icon>mdi-plus</v-icon>
-                    </v-btn>
-                  </template>
-                  <v-card>
-                    <v-card-title>
-                      <span class="headline">Registrasi Peserta</span>
-                    </v-card-title>
-                    <v-card-text>
-                      <v-container>
-                        <v-row>
-                          <v-col cols="12" sm="6" md="4">
-                            <v-text-field label="Name*" required></v-text-field>
-                          </v-col>
+    <v-data-table
+    :headers="headers"
+    :items="users"
+    sort-by="id"
+    class="elevation-1"
+    :search="search"
+    :hide-default-footer="true"
+    disable-pagination="true"
+    >
 
-                          <v-col cols="12">
-                            <v-text-field
-                              label="Email*"
-                              required
-                            ></v-text-field>
-                          </v-col>
-                          <v-col cols="12">
-                            <v-text-field
-                              label="Password*"
-                              type="password"
-                              required
-                            ></v-text-field>
-                          </v-col>
-                          <v-col cols="12">
-                            <v-text-field
-                              label="Confirmation Password*"
-                              type="password"
-                              required
-                            ></v-text-field>
-                          </v-col>
+    <template v-slot:top>
+      <v-toolbar flat color="white">
+        <!-- untuk search -->
+        <v-text-field
+            v-model="search"
+            append-icon="search"
+            label="Search"
+            single-line
+            hide-details
+          ></v-text-field>
+        <v-row justify="center">
+        <v-dialog v-model="dialog" persistent max-width="600px">
+          <template v-slot:activator="{ on }">
+            <v-btn icon color="primary" dark v-on="on">Add Peserta
+              <v-icon>mdi-pencil</v-icon>
+            </v-btn>
+          </template>
 
-                        </v-row>
-                      </v-container>
-                      <small>*indicates required field</small>
-                    </v-card-text>
-                    <v-card-actions>
-                      <v-spacer></v-spacer>
-                      <v-btn color="blue darken-1" text @click="dialog = false"
-                        >Close</v-btn
-                      >
-                      <v-btn color="blue darken-1" text @click="dialog = false"
-                        >Save</v-btn
-                      >
-                    </v-card-actions>
-                  </v-card>
-                </v-dialog>
-              </v-row>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- <tr v-for="user in users" :key="user.id">
-                  <td>{{ user.id }}</td>
-                  <td>{{ user.name }}</td>
-                  <td>{{ user.email }}</td>
-                  <td>{{ user.password }}</td>
-                  <td>{{ user.status }}</td> -->
-          <tr>
-            <td>009</td>
-            <td>James Alexander</td>
-            <td>jamesal@gmail.com</td>
-            <td>AUDISI</td>
-            <td>
-              <b-link href="#foo">Edit </b-link>
-              |
-              <b-link href="#foo">Delete</b-link>
-            </td>
-          </tr>
-        </tbody>
-      </template>
-    </v-simple-table>
+          <v-card>
+            <form @submit.prevent="save">
+            <v-card-title>
+              <span class="headline">Registrasi Peserta</span>
+            </v-card-title>
+            <v-card-text>
+               <v-container>
+                  <v-row>
+                    <v-col cols="12" sm="6" md="4">
+                      <v-text-field label="Name*" required v-model="form.name"></v-text-field>
+                    </v-col>
+                    <v-col cols="12">
+                      <v-text-field label="Email*" required v-model="form.email"></v-text-field>
+                    </v-col>
+                    <v-col cols="12">
+                      <v-text-field label="Password*" required v-model="form.password"
+                      :type="show ? 'text' : 'password'"
+                      :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
+                      @click:append="show = !show"
+                      :rules="[rulespass.required, rulespass.min]"></v-text-field>
+                    </v-col>
+                    <v-col cols="12">
+                      <v-text-field label="Confirmation Password*" required v-model="form.password_confirmation"
+                      :type="show1 ? 'text' : 'password'"
+                      :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                      @click:append="show1 = !show1"
+                      :rules='rules'></v-text-field>
+                    </v-col>
+                  </v-row>
+                </v-container>
+                  <small>*indicates required field</small>
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="blue darken-1" text @click="dialog = false">Close</v-btn>
+              <v-btn color="blue darken-1" type="submit" v-show="!updateSubmit" text @click="dialog = false">Save</v-btn>
+              <v-btn color="blue darken-1" v-show="updateSubmit" v-on:click="update(form)" text @click="dialog = false">Update</v-btn>
+            </v-card-actions>
+          </form>
+        </v-card>
+        </v-dialog>
+        </v-row>
+      </v-toolbar>
+    </template>
+    <template v-slot:item.actions="{ item }">
+       <v-icon
+          v-on:click="edit(item)"
+          color="success"
+        >
+          mdi-pencil
+        </v-icon>
+        <v-icon
+          @click="hapus(item)"
+          color="error"
+        >
+          mdi-delete
+        </v-icon>
+    </template>
+    </v-data-table>
   </v-app>
 </template>
 
@@ -101,13 +99,84 @@ export default {
     return {
       hasSaved: false,
       dialog: false,
-      user: []
+      users: [],
+      show: false,
+      show1: false,
+      updateSubmit: false,
+      headers: [
+        { text: 'Name', value: 'name' },
+        { text: 'Email', value: 'email' },
+        { text: 'Status', value: 'status' },
+        { text: 'Actions', value: 'actions', sortable: false }
+      ],
+      search: '',
+      rulespass: {
+        required: value => !!value || 'Required.',
+        min: v => v.length >= 8 || 'Min 8 characters'
+      },
+      rulescpass: {
+
+      },
+      form:
+        {
+          name: '',
+          email: '',
+          password: '',
+          password_confirmation: ''
+        }
     }
   },
-
   async mounted () {
-    const response = await axios.get('http://localhost:8000/user')
-    this.users = response.data
+    const response = await axios.get('peserta/getAll')
+    this.users = response.data.user
+  },
+  methods: {
+    async save () {
+      try {
+        await axios.post('registerPeserta', this.form)
+        this.name = ''
+        this.email = ''
+        this.password = ''
+        alert('Data Berhasil ditambahkan')
+        window.location.reload()
+      } catch (e) {
+        console.log(e)
+      }
+    },
+    async edit (user) {
+      if (confirm('Do you really want to edit?')) {
+        if (confirm('Password must be update, are you sure to edit this data?')) {
+          this.updateSubmit = true
+          this.form.id = user.id
+          this.form.name = user.name
+          this.form.email = user.email
+          this.dialog = true
+        }
+      }
+    },
+    async update (form) {
+      try {
+        await axios.post('http://localhost:8000/api/pesertaEdit/' + form.id, this.form)
+        this.name = ''
+        this.email = ''
+        this.updateSubmit = false
+        alert('Data Berhasil diubah')
+        window.location.reload()
+      } catch (e) {
+        console.log(e)
+      }
+    },
+    async hapus (user) {
+      if (confirm('Do you really want to delete?')) {
+        try {
+          await axios.post('http://localhost:8000/api/user/delete/' + user.id)
+          alert('Data terhapus')
+          window.location.reload()
+        } catch (e) {
+          console.log(e)
+        }
+      }
+    }
   }
 }
 </script>

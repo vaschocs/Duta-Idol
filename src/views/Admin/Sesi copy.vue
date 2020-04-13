@@ -29,7 +29,30 @@
                               required
                             ></v-text-field>
                           </v-col>
-
+                          <v-col cols="12" sm="6" md="4">
+                            <v-menu
+                              v-model="menu"
+                              :close-on-content-click="false"
+                              :nudge-right="40"
+                              transition="scale-transition"
+                              offset-y
+                              min-width="290px"
+                            >
+                              <template v-slot:activator="{ on }">
+                                <v-text-field
+                                  v-model="date"
+                                  label="Picker without buttons"
+                                  prepend-icon="event"
+                                  readonly
+                                  v-on="on"
+                                ></v-text-field>
+                              </template>
+                              <v-date-picker
+                                v-model="date"
+                                @input="menu = false"
+                              ></v-date-picker>
+                            </v-menu>
+                          </v-col>
                           <v-col cols="12" sm="6" md="4">
                             <v-menu
                               v-model="menu"
@@ -65,7 +88,7 @@
                             >
                               <template v-slot:activator="{ on }">
                                 <v-text-field
-                                  v-model="date2"
+                                  v-model="date"
                                   label="Tanggal Akhir Vote"
                                   prepend-icon="event"
                                   readonly
@@ -73,7 +96,7 @@
                                 ></v-text-field>
                               </template>
                               <v-date-picker
-                                v-model="date2"
+                                v-model="date"
                                 @input="menu2 = false"
                               ></v-date-picker>
                             </v-menu>
@@ -89,13 +112,17 @@
                               <template v-slot:activator="{ on }">
                                 <v-text-field
                                   v-model="time"
-                                  label="Jam Akhir"
+                                  label="Picker in dialog"
                                   prepend-icon="access_time"
                                   readonly
                                   v-on="on"
                                 ></v-text-field>
                               </template>
-                              <v-datetime-picker label="Select Datetime" v-model="datetime"> </v-datetime-picker>
+                              <v-time-picker
+                                v-if="modal2"
+                                v-model="time"
+                                full-width
+                              >
                                 <v-spacer></v-spacer>
                                 <v-btn
                                   text

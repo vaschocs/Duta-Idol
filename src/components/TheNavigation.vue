@@ -13,6 +13,17 @@
           <v-icon>mdi-home</v-icon>
         </v-btn>
       </router-link>
+      <router-link  to="dashboard">
+        <v-btn icon>
+          <v-icon>mdi-star</v-icon>
+        </v-btn>
+      </router-link>
+
+      <router-link  to="votejuri">
+        <v-btn icon>
+          <v-icon>mdi-account</v-icon>
+        </v-btn>
+      </router-link>
 
       <router-link  to="juri">
         <v-btn >
