@@ -29,73 +29,12 @@
                               required
                             ></v-text-field>
                           </v-col>
-
-                          <v-col cols="12" sm="6" md="4">
-                            <v-menu
-                              v-model="menu"
-                              :close-on-content-click="false"
-                              :nudge-right="40"
-                              transition="scale-transition"
-                              offset-y
-                              min-width="290px"
-                            >
-                              <template v-slot:activator="{ on }">
-                                <v-text-field
-                                  v-model="date"
-                                  label="Tanggal Mulai"
-                                  prepend-icon="event"
-                                  readonly
-                                  v-on="on"
-                                ></v-text-field>
-                              </template>
-                              <v-date-picker
-                                v-model="date"
-                                @input="menu = false"
-                              ></v-date-picker>
-                            </v-menu>
-                          </v-col>
-                          <v-col cols="12" sm="6" md="4">
-                            <v-menu
-                              v-model="menu2"
-                              :close-on-content-click="false"
-                              :nudge-right="40"
-                              transition="scale-transition"
-                              offset-y
-                              min-width="290px"
-                            >
-                              <template v-slot:activator="{ on }">
-                                <v-text-field
-                                  v-model="date2"
-                                  label="Tanggal Akhir Vote"
-                                  prepend-icon="event"
-                                  readonly
-                                  v-on="on"
-                                ></v-text-field>
-                              </template>
-                              <v-date-picker
-                                v-model="date2"
-                                @input="menu2 = false"
-                              ></v-date-picker>
-                            </v-menu>
-                          </v-col>
                           <v-col cols="11" sm="5">
-                            <v-dialog
-                              ref="dialog"
-                              v-model="modal2"
-                              :return-value.sync="time"
-                              persistent
-                              width="290px"
-                            >
-                              <template v-slot:activator="{ on }">
-                                <v-text-field
-                                  v-model="time"
-                                  label="Jam Akhir"
-                                  prepend-icon="access_time"
-                                  readonly
-                                  v-on="on"
-                                ></v-text-field>
-                              </template>
-                              <v-datetime-picker label="Select Datetime" v-model="datetime"> </v-datetime-picker>
+                              <v-datetime-picker
+                              label="Mulai Sesi"
+                              v-model="datetime2"
+                              :time-picker-props="timeProps"
+                              time-format='HH:mm:ss'>
                                 <v-spacer></v-spacer>
                                 <v-btn
                                   text
@@ -109,8 +48,28 @@
                                   @click="$refs.dialog.save(time)"
                                   >OK</v-btn
                                 >
-                              </v-time-picker>
-                            </v-dialog>
+                              </v-datetime-picker>
+                          </v-col>
+                          <v-col cols="11" sm="5">
+                              <v-datetime-picker
+                              label="Akhir Sesi"
+                              v-model="datetime2"
+                              :time-picker-props="timeProps"
+                              time-format='HH:mm:ss'>
+                                <v-spacer></v-spacer>
+                                <v-btn
+                                  text
+                                  color="primary"
+                                  @click="modal2 = false"
+                                  >Cancel</v-btn
+                                >
+                                <v-btn
+                                  text
+                                  color="primary"
+                                  @click="$refs.dialog.save(time)"
+                                  >OK</v-btn
+                                >
+                              </v-datetime-picker>
                           </v-col>
                         </v-row>
                       </v-container>
@@ -153,6 +112,7 @@
 
 <script>
 import axios from 'axios'
+import DatetimePicker from 'vuetify-datetime-picker'
 
 export default {
   name: 'sesi',
@@ -161,13 +121,17 @@ export default {
       hasSaved: false,
       dialog: false,
       menu: false,
-
       time: null,
       menu2: false,
       modal2: false,
-
       modal1: false,
-      user: []
+      user: [],
+
+      timeProps: {
+        useSeconds: true,
+        format: '24hr',
+        ampmInTitle: true
+      }
     }
   },
 
