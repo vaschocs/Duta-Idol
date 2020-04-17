@@ -9,6 +9,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
 import DatetimePicker from 'vuetify-datetime-picker'
+import moment from 'moment'
 
 Vue.use(DatetimePicker)
 
@@ -18,9 +19,16 @@ Vue.use(IconsPlugin)
 
 require('@/store/subscriber')
 
-axios.defaults.baseURL = 'http://localhost:8000/api'
+// axios.defaults.baseURL = 'http://localhost:8000/api'
+axios.defaults.baseURL = 'https://immense-thicket-40687.herokuapp.com/api'
 
 Vue.config.productionTip = false
+
+Vue.filter('formatDate', function(value) {
+  if (value) {
+    return moment(String(value)).format('YYYY/MM/DD HH:mm:ss')
+  }
+});
 
 store.dispatch('auth/attempt', localStorage.getItem('token')).then(() => {
     new Vue({

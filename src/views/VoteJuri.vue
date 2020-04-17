@@ -33,7 +33,9 @@ export default {
       this.users = response.data.user
       this.juri = responseJuri.data.user
     } catch (e) {
-      console.log(e)
+        console.log(e)
+        console.log(e.response.data.error)
+        alert(e + '\n' +e.response.data.error)
     }
   },
 
@@ -45,10 +47,11 @@ export default {
         console.log(obj)
         await axios.post('/vote/juri/' + user.id, obj)
         alert('Anda berhasil melakukan vote ' + user.name)
-        // window.location.reload()
+        window.location.reload()
       } catch (e) {
-        alert(e)
         console.log(e)
+        console.log(e.response.data.error)
+        alert(e + '\n' +e.response.data.error)
       }
     }
   }

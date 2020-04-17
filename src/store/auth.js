@@ -26,9 +26,16 @@ export default {
   },
   actions: {
     async signIn ({ dispatch }, credentials) {
-      const response = await axios.post('login', credentials)
+      try{
+        const response = await axios.post('login', credentials)
 
-      return dispatch('attempt', response.data.token)
+        return dispatch('attempt', response.data.token)
+      }catch(e){
+        console.log(e)
+        console.log(e.response.data.error)
+        alert(e + '\n' +e.response.data.error)
+      }
+
     },
     async attempt ({ commit, state }, token) {
       if (token) {
@@ -47,13 +54,23 @@ export default {
       } catch (e) {
         commit('SET_TOKEN', null)
         commit('SET_USER', null)
+        console.log(e)
+        console.log(e.response.data.error)
+        alert(e + '\n' +e.response.data.error)
       }
     },
     signOut ({ commit }) {
-      return axios.post('logout').then(() => {
-        commit('SET_TOKEN', null)
-        commit('SET_USER', null)
-      })
+      try{
+        return axios.post('logout').then(() => {
+          commit('SET_TOKEN', null)
+          commit('SET_USER', null)
+        })
+      }catch(e){
+        console.log(e)
+        console.log(e.response.data.error)
+        alert(e + '\n' +e.response.data.error)
+      }
+
     }
   }
 }

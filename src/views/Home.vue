@@ -38,6 +38,8 @@ export default {
       this.users = response.data.user
     } catch (e) {
       console.log(e)
+      console.log(e.response.data.error)
+      alert(e + '\n' +e.response.data.error)
     }
   },
 
@@ -48,8 +50,9 @@ export default {
         alert('Anda berhasil melakukan vote ' + user.name)
         window.location.reload()
       } catch (e) {
-        alert(e)
         console.log(e)
+        console.log(e.response.data.error)
+        alert(e + '\n' +e.response.data.error)
       }
     }
   }
