@@ -125,10 +125,6 @@ export default {
         v => !!v || 'E-mail is required',
         v => /.+@.+\..+/.test(v) || 'E-mail must be valid'
       ],
-      rulespass: {
-        required: value => !!value || 'Required.',
-        min: v => v.length >= 8 || 'Min 8 characters'
-      },
       dialog: false
     }
   },
@@ -136,6 +132,7 @@ export default {
   methods: {
     ...mapActions({
       signIn: 'auth/signIn'
+
     }),
     submit () {
       this.signIn(this.form)
@@ -144,9 +141,7 @@ export default {
             name: 'dashboard'
           })
         })
-        .catch(() => {
-          console.log('failed sign in')
-        })
+        alert('email atau password yang anda masukan salah')
     }
   }
 }

@@ -9,6 +9,8 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
 import DatetimePicker from 'vuetify-datetime-picker'
+import { BSidebar } from 'bootstrap-vue'
+Vue.component('b-sidebar', BSidebar)
 
 Vue.use(DatetimePicker)
 
