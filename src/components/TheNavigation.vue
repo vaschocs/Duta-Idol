@@ -8,9 +8,8 @@
       <v-spacer></v-spacer>
 
       <template v-if="authenticated" >
+
         {{user.role}}
-        {{user.name}}
-        {{user}}
         <!-- <router-link to="dashboard">
           <v-btn icon>
             <v-icon>mdi-star</v-icon>
@@ -27,28 +26,28 @@
           </v-btn>
         </router-link> -->
 
-        <router-link to="sesi">
+        <!-- <router-link to="sesi">
           <v-btn>
             Sesi
           </v-btn>
-        </router-link>
+        </router-link> -->
       </template>
 
-      <!-- <template v-else-if="user.role==1"> -->
+      <!-- <template v-else-if="user.role==1">
          <router-link to="datapeserta">
         <v-btn icon>
           <v-icon>mdi-account</v-icon>
         </v-btn>
       </router-link>
-      <!-- </template> -->
-      <!-- <template v-else-if="user.role==2"> -->
+      </template>
+      <template v-else-if="user.role==2">
         <router-link to="votejuri">
         <v-btn icon>
           <v-icon>mdi-account</v-icon>
         </v-btn>
       </router-link>
 
-      <!-- </template> -->
+      </template> -->
 
 
       <router-link to="/">
@@ -60,6 +59,7 @@
       <router-link to="signin">
         <v-btn icon>
           SIGN IN
+
         </v-btn>
       </router-link>
     </v-app-bar>

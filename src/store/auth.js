@@ -12,7 +12,7 @@ export default {
             return state.token && state.user
         },
         user(state) {
-            return state.user.user
+            return state.user
         }
     },
 
@@ -40,6 +40,7 @@ export default {
             try {
                 const response = await axios.get('user')
                 commit('SET_USER', response.data.user)
+
             } catch (e) {
                 commit('SET_TOKEN', null)
                 commit('SET_USER', null)
