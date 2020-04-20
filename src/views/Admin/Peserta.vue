@@ -127,8 +127,15 @@ export default {
     }
   },
   async mounted () {
-    const response = await axios.get('peserta/getAll')
-    this.users = response.data.user
+    try{
+      const response = await axios.get('peserta/getAll')
+      this.users = response.data.user
+    }catch(e){
+      console.log(e)
+      console.log(e.response.data.error)
+      alert(e + '\n' +e.response.data.error)
+    }
+
   },
   methods: {
     async save () {
@@ -141,6 +148,8 @@ export default {
         window.location.reload()
       } catch (e) {
         console.log(e)
+        console.log(e.response.data.error)
+        alert(e + '\n' +e.response.data.error)
       }
     },
     async edit (user) {
@@ -164,6 +173,8 @@ export default {
         window.location.reload()
       } catch (e) {
         console.log(e)
+        console.log(e.response.data.error)
+        alert(e + '\n' +e.response.data.error)
       }
     },
     async hapus (user) {
@@ -174,6 +185,8 @@ export default {
           window.location.reload()
         } catch (e) {
           console.log(e)
+          console.log(e.response.data.error)
+          alert(e + '\n' +e.response.data.error)
         }
       }
     }

@@ -135,6 +135,8 @@ export default {
       this.users = response.data.user
     } catch (e) {
       console.log(e)
+      console.log(e.response.data.error)
+      alert(e + '\n' +e.response.data.error)
     }
   },
 
@@ -151,8 +153,9 @@ export default {
         alert('Data Berhasil ditambahkan')
         window.location.reload()
       } catch (e) {
-        alert(e)
         console.log(e)
+        console.log(e.response.data.error)
+        alert(e + '\n' +e.response.data.error)
       }
     },
     async edit (user) {
@@ -178,6 +181,8 @@ export default {
         window.location.reload()
       } catch (e) {
         console.log(e)
+        console.log(e.response.data.error)
+        alert(e + '\n' +e.response.data.error)
       }
     },
     async hapus (user) {
@@ -187,7 +192,9 @@ export default {
           alert('Data terhapus')
           window.location.reload()
         } catch (e) {
-          console.log(e)
+        console.log(e)
+        console.log(e.response.data.error)
+        alert(e + '\n' +e.response.data.error)
         }
       }
     }

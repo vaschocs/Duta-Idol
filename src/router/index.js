@@ -8,59 +8,106 @@ import Juri from '../views/Admin/Juri.vue'
 import Peserta from '../views/Admin/Peserta.vue'
 import Sesi from '../views/Admin/Sesi.vue'
 import Vue from 'vue'
+import DataPeserta from '../views/DataPeserta'
+
 
 Vue.use(VueRouter)
 
 const routes = [{
-  path: '/',
-  name: 'home',
-  component: Home
-},
-{
-  path: '/votejuri',
-  name: 'votejuri',
-  component: VoteJuri
-},
-{
-  path: '/signin',
-  name: 'signin',
-  component: SignIn
-},
-{
-  path: '/sesi',
-  name: 'sesi',
-  component: Sesi
-},
-{
-  path: '/juri',
-  name: 'juri',
-  component: Juri
-},
-{
-  path: '/peserta',
-  name: 'peserta',
-  component: Peserta
-},
-{
-  path: '/dashboard',
-  name: 'dashboard',
-  component: Dashboard,
-  beforeEnter: (to, from, next) => {
-    if (!store.getters['auth/authenticated']) {
-      return next({
-        name: 'signin'
-      })
+        path: '/',
+        name: 'home',
+        component: Home
+    },
+    {
+        path: '/votejuri',
+        name: 'votejuri',
+        component: VoteJuri,
+        beforeEnter: (to, from, next) => {
+            if (!store.getters['auth/authenticated']) {
+                return next({
+                    name: 'signin'
+                })
+            }
+            next()
+        }
+    },
+    {
+        path: '/datapeserta',
+        name: 'datapeserta',
+        component: DataPeserta,
+        beforeEnter: (to, from, next) => {
+            if (!store.getters['auth/authenticated']) {
+                return next({
+                    name: 'signin'
+                })
+            }
+            next()
+        }
+    },
+    {
+        path: '/signin',
+        name: 'signin',
+        component: SignIn
+    },
+    {
+        path: '/sesi',
+        name: 'sesi',
+        component: Sesi,
+        beforeEnter: (to, from, next) => {
+            if (!store.getters['auth/authenticated']) {
+                return next({
+                    name: 'signin'
+                })
+            }
+            next()
+        }
+    },
+    {
+        path: '/juri',
+        name: 'juri',
+        component: Juri,
+        beforeEnter: (to, from, next) => {
+            if (!store.getters['auth/authenticated']) {
+                return next({
+                    name: 'signin'
+                })
+            }
+            next()
+        }
+    },
+    {
+        path: '/peserta',
+        name: 'peserta',
+        component: Peserta,
+        beforeEnter: (to, from, next) => {
+            if (!store.getters['auth/authenticated']) {
+                return next({
+                    name: 'signin'
+                })
+            }
+            next()
+        }
+    },
+    {
+        path: '/dashboard',
+        name: 'dashboard',
+        component: Dashboard,
+        beforeEnter: (to, from, next) => {
+            if (!store.getters['auth/authenticated']) {
+                return next({
+                    name: 'signin'
+                })
+            }
+            next()
+        }
     }
-    next()
-  }
-}
 
 ]
 
 const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes
+    mode: 'history',
+    base: process.env.BASE_URL,
+    routes
 })
 
 export default router
