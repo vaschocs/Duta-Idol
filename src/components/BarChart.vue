@@ -23,6 +23,15 @@ export default {
 
   mounted () {
     this.renderChart(this.chartdata, this.options)
+
+    try {
+      const response = await axios.get('juri/getAll')
+      this.users = response.data.user
+    } catch (e) {
+      console.log(e)
+      console.log(e.response.data.error)
+      alert(e + '\n' +e.response.data.error)
+    }
   }
 }
 </script>
