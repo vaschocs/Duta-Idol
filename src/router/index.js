@@ -2,7 +2,8 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import VoteJuri from '../views/VoteJuri.vue'
 import SignIn from '../views/SignIn.vue'
-import Dashboard from '../views/Admin/Dashboard.vue'
+import Dashboard from '../views/Dashboard.vue'
+import Report from '../views/Admin/Report.vue'
 import store from '@/store'
 import Juri from '../views/Admin/Juri.vue'
 import Peserta from '../views/Admin/Peserta.vue'
@@ -92,6 +93,19 @@ const routes = [{
         path: '/dashboard',
         name: 'dashboard',
         component: Dashboard,
+        beforeEnter: (to, from, next) => {
+            if (!store.getters['auth/authenticated']) {
+                return next({
+                    name: 'signin'
+                })
+            }
+            next()
+        }
+    },
+    {
+        path: '/report',
+        name: 'report',
+        component: Report,
         beforeEnter: (to, from, next) => {
             if (!store.getters['auth/authenticated']) {
                 return next({

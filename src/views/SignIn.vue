@@ -77,8 +77,10 @@
                                 :type="show1 ? 'text' : 'password'"
                                 :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
                                 @click:append="show1 = !show1"
-                                :rules="rules"
+                                :rules='rulesco'
+
                               ></v-text-field>
+
                             </v-col>
                           </v-row>
                         </v-container>
@@ -139,7 +141,7 @@ export default {
     return {
       form: {
         email: "",
-        password: ""
+        password: "",
       },
       show: false,
       show1: false,
@@ -151,9 +153,9 @@ export default {
         required: value => !!value || "Required.",
         min: v => v.length >= 8 || "Min 8 characters"
       },
-      // rulescopass: [
-      //   this.form.password !== this.form.password_confirmation || "password doesnt match"
-      // ],
+      rulesco:{
+        // required: value !== this.form.password_confirmation  || 'password doesnt match'
+      },
 
       dialog: false
     };

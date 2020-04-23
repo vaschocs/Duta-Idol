@@ -1,34 +1,41 @@
 <template>
-<div>
-    <br>
-
-<br>
-<br>
-<br>
-{{user.name}}
-</div>
+  <table class="table">
+    <tr>
+      <td>ID :</td>
+      <td>{{ user.id }}</td>
+    </tr>
+    <tr>
+      <td>Nama :</td>
+      <td>{{ user.name }}</td>
+    </tr>
+    <tr>
+      <td>Email :</td>
+      <td>{{ user.email }}</td>
+    </tr>
+    <tr>
+      <td>Status :</td>
+      <td>{{ user.status }}</td>
+    </tr>
+  </table>
 
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 
 export default {
-    data(){
-        return {
-            users: []
-        }
-    },
-    async mounted () {
+  data() {
+    return {
+      user: ""
+    };
+  },
+  async mounted() {
     try {
-
-      const responsPeserta = await axios.get('/user')
-
-
+      const response = await axios.get("/user");
+      this.user = response.data.user;
     } catch (e) {
-        console.log(e)
-
+      console.log(e);
     }
   }
-}
+};
 </script>
