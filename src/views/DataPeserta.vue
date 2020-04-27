@@ -17,9 +17,12 @@
       <td>Status :</td>
       <td>{{ user.status }}</td>
     </tr>
+    <tr>
+      <v-btn v-on:click="edit(user)">EDIT PESERTA</v-btn>
+    </tr>
   </table>
 
-    <v-btn v-on:click="edit(item)">EDIT PESERTA</v-btn>
+
 
    <v-row justify="center">
         <v-dialog v-model="dialog" persistent max-width="600px">
