@@ -11,6 +11,14 @@
           </v-card>
         </v-col>
       </v-row>
+      <v-row flat v-if="!statusVote">
+          <v-col>
+            <div class="container" align='center'>
+              <H1>Anda tidak sedang berada dalam sesi Vote</H1><br>
+              <img src="@/assets/Untitled-1.png" />
+            </div>
+          </v-col>
+      </v-row>
     </v-card-text>
   </v-card>
 </template>
@@ -22,20 +30,29 @@ export default {
   data () {
     return {
       users: [],
-      juri: ''
+      juri: '',
+      statusVote: true,
     }
   },
 
   async mounted () {
     try {
       const response = await axios.get('/vote/list')
-      const responseJuri = await axios.get('/user')
       this.users = response.data.user
-      this.juri = responseJuri.data.user
+      this.statusVote=true
     } catch (e) {
         console.log(e)
         console.log(e.response.data.error)
-        alert(e + '\n' +e.response.data.error)
+        // alert(e + '\n' +e.response.data.error)
+        this.statusVote=false
+    }
+    try{
+      const responseJuri = await axios.get('/user')
+      this.juri = responseJuri.data.user
+    }catch(e){
+        console.log(e)
+        console.log(e.response.data.error)
+        // alert(e + '\n' +e.response.data.error)
     }
   },
 
