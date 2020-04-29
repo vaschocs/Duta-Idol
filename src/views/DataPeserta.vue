@@ -127,7 +127,7 @@ export default {
     },
     async update (form) {
       try {
-        await axios.post('pesertaEdit/' + user.id, this.form)
+        await axios.post('pesertaEdit/' + form.id, this.form)
         this.name = ''
         this.email = ''
         this.updateSubmit = false

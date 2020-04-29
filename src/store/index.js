@@ -4,10 +4,16 @@ import auth from './auth'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  state: {},
-  mutations: {},
-  actions: {},
-  modules: {
-    auth
-  }
+    state: { loader: false },
+    mutations: {
+        LOADER(state, payload) {
+            state.loader = payload;
+        }
+    },
+    actions: {},
+    modules: {
+        auth
+
+    }
+
 })
