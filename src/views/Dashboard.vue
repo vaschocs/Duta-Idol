@@ -1,7 +1,7 @@
 <template>
 <div class="jumbotron jumbotron-fluid">
   <div class="container" align='center'>
-     <img src="@/assets/Untitled-1.png" />
+     <img src="../assets/Untitled-1.png" />
   </div>
 </div>
 
