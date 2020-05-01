@@ -46,7 +46,7 @@ const routes = [{
         }
     },
     {
-        path: '/~nikolaus/signin',
+        path: '/signin',
         name: 'signin',
         component: SignIn
     },
