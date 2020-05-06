@@ -3,7 +3,8 @@
     <Loader></Loader>
     <v-app-bar color="deep-purple" dense dark>
       <v-toolbar-title>
-        <h2>DUTA IDOL</h2>
+        <h5 v-if="authenticated">Selamat datang di DUTA IDOL, {{user.name}}</h5>
+        <h5 v-if="!authenticated">DUTA IDOL</h5>
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
