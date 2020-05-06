@@ -5,14 +5,20 @@
         persistent
         width="300"
     >
-        <v-overlay>
-            <v-progress-circular indeterminate size="64"></v-progress-circular>
-            <br> <br>
-            <center>
-            <p dark style = "font-family:calibri,arial;;font-size:16px;font-style:bold;">
-                LOADING ...
-            </p>
-            </center>
-        </v-overlay>
+
+      <v-card
+        color="primary"
+        dark
+      >
+        <v-card-text>
+          LOADING
+          <v-progress-linear
+            indeterminate
+            color="white"
+            class="mb-0"
+          ></v-progress-linear>
+        </v-card-text>
+      </v-card>
+
     </v-dialog>
 </template>

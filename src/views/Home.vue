@@ -17,6 +17,7 @@
               <H1>Anda tidak sedang berada dalam sesi Vote</H1><br>
               <b-img :src="require('../assets/Untitled-1.png')" fluid alt="Responsive image"></b-img>
             </div>
+             <img src="@/assets/Untitled-1.png" />
           </v-col>
       </v-row>
     </v-card-text>
