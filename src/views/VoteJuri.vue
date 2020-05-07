@@ -1,7 +1,7 @@
 <template>
-  <v-card flat>
+  <v-card>
     <v-card-text>
-      <v-row>
+      <v-row flat v-if="statusVote">
         <v-col cols="12" sm="2" v-for="user in users" :key="user.id">
           <v-card color="#285F72" dark>
             <v-card-title class="headline">{{user.name}}</v-card-title>
@@ -15,7 +15,7 @@
           <v-col>
             <div class="container" align='center'>
               <H1>Anda tidak sedang berada dalam sesi Vote</H1><br>
-              <img src="../assets/Untitled-1.png" />
+              <b-img :src="require('../assets/Untitled-1.png')" fluid alt="Responsive image"></b-img>
             </div>
           </v-col>
       </v-row>

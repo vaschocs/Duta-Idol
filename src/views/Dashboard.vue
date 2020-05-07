@@ -1,9 +1,10 @@
 <template>
-<div class="jumbotron jumbotron-fluid">
+
   <div class="container" align='center'>
-     <img src="../assets/Untitled-1.png" />
+    <H2>Selamat Datang di SIPOLI</H2><br>
+    <b-img :src="require('../assets/Untitled-1.png')" fluid alt="Responsive image"></b-img>
   </div>
-</div>
+
 
 </template>
 <script>

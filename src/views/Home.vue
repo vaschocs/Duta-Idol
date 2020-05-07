@@ -15,9 +15,8 @@
           <v-col>
             <div class="container" align='center'>
               <H1>Anda tidak sedang berada dalam sesi Vote</H1><br>
-              <img src="../assets/Untitled-1.png" />
+              <b-img :src="require('../assets/Untitled-1.png')" fluid alt="Responsive image"></b-img>
             </div>
-             <img src="@/assets/Untitled-1.png" />
           </v-col>
       </v-row>
     </v-card-text>

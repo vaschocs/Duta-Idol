@@ -6,7 +6,8 @@
 
       <v-spacer></v-spacer>
       <v-toolbar-title>
-        <h2>DUTA IDOL</h2>
+        <h5 v-if="authenticated">Welcome, {{user.name}}</h5>
+        <h5 v-if="!authenticated">DUTA IDOL</h5>
       </v-toolbar-title>
     </v-app-bar>
     <!-- <v-card class="mx-auto overflow-hidden" height="400"> -->
@@ -88,6 +89,14 @@
                 </v-list-item>
               </router-link>
             </template>
+            <router-link to="dashboard">
+              <v-list-item >
+                <v-list-item-icon>
+                  <v-icon>mdi-home</v-icon>
+                </v-list-item-icon>
+                <v-list-item-title>Home</v-list-item-title>
+              </v-list-item>
+            </router-link>
             <router-link to="/">
               <v-list-item @click.prevent="signOut" v-show="btnSignout">
                 <v-list-item-icon>
@@ -96,6 +105,7 @@
                 <v-list-item-title>Sign Out</v-list-item-title>
               </v-list-item>
             </router-link>
+
           </template>
         </v-list-item-group>
       </v-list>

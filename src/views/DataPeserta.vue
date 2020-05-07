@@ -151,12 +151,12 @@ export default {
     },
     async update(form) {
       try {
-        await axios.post("pesertaEdit/" + form.id, this.form);
-        this.name = "";
-        this.email = "";
-        this.updateSubmit = false;
-        alert("Data Berhasil diubah");
-        window.location.reload();
+        await axios.post('/pesertaEdit/' + form.id, this.form)
+        this.name = ''
+        this.email = ''
+        this.updateSubmit = false
+        alert('Data Berhasil diubah')
+        window.location.reload()
       } catch (e) {
         console.log(e);
         console.log(e.response.data.error);
@@ -166,9 +166,9 @@ export default {
     async hapus(user) {
       if (confirm("Do you really want to delete?")) {
         try {
-          await axios.post("http://localhost:8000/api/user/delete/" + user.id);
-          alert("Data terhapus");
-          window.location.reload();
+          await axios.post('/user/delete/' + user.id)
+          alert('Data terhapus')
+          window.location.reload()
         } catch (e) {
           console.log(e);
           console.log(e.response.data.error);
