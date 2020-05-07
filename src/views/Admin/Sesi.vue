@@ -74,7 +74,9 @@
                           label="Akhir Sesi"
                           v-model="form.tgl_akhir_vote"
                           :time-picker-props="timeProps"
-                          time-format='HH:mm:ss'>
+                          time-format='HH:mm:ss'
+                          :min="minDate"
+                          >
                           <v-spacer></v-spacer>
                             <v-btn
                               text
@@ -139,6 +141,7 @@ export default {
       time: null,
       modal2: false,
       sesis: [],
+      date: this.tgl_mulai_vote,
       headers: [
         { text: 'Keterangan Sesi', value: 'ket_sesi' },
         { text: 'Tanggal Mulai Vote', value: 'tgl_mulai_vote' },
@@ -146,6 +149,9 @@ export default {
         { text: 'Status sesi', value: 'status_sesi', sortable: false },
         { text: 'Actions', value: 'actions', sortable: false }
       ],
+      minDate:{
+        min: this.tgl_mulai_vote
+      },
       timeProps: {
         useSeconds: true,
         format: '24hr',
