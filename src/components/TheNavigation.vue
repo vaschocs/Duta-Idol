@@ -2,74 +2,13 @@
   <div>
     <Loader></Loader>
     <v-app-bar color="deep-purple" dense dark>
-      <v-toolbar-title>
-        <h5 v-if="authenticated">Selamat datang di DUTA IDOL, {{user.name}}</h5>
-        <h5 v-if="!authenticated">DUTA IDOL</h5>
-      </v-toolbar-title>
+      <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
 
       <v-spacer></v-spacer>
-
-      <template v-if="authenticated">
-        <!-- <template v-if="user.role == 0">
-            <router-link to="juri">
-              <v-btn>
-                Juri
-              </v-btn>
-            </router-link>
-            <router-link to="peserta">
-              <v-btn>
-                Peserta
-              </v-btn>
-            </router-link>
-            <router-link to="sesi">
-              <v-btn>
-                Sesi
-              </v-btn>
-            </router-link>
-
-            <router-link to="report">
-              <v-btn>
-                Report
-              </v-btn>
-            </router-link>
-          </template> -->
-        <template v-if="user.role == 1">
-          <router-link to="datapeserta">
-            <v-btn>
-              DATA PESERTA
-            </v-btn>
-          </router-link>
-        </template>
-
-        <template v-if="user.role == 2">
-          <router-link to="votejuri">
-            <v-btn>
-              VOTE PESERTA
-            </v-btn>
-          </router-link>
-        </template>
-
-        <router-link to="/">
-          <v-btn @click.prevent="signOut" v-show="btnSignout">
-            SIGN OUT
-          </v-btn>
-        </router-link>
-      </template>
-
-      <template v-if="!authenticated">
-        <router-link to="/">
-          <v-btn icon>
-            <v-icon>mdi-home</v-icon>
-          </v-btn>
-        </router-link>
-
-        <router-link to="signin">
-          <v-btn>
-            SIGN IN
-          </v-btn>
-        </router-link>
-      </template>
-      <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
+      <v-toolbar-title>
+        <h5 v-if="authenticated">Welcome, {{user.name}}</h5>
+        <h5 v-if="!authenticated">DUTA IDOL</h5>
+      </v-toolbar-title>
     </v-app-bar>
     <!-- <v-card class="mx-auto overflow-hidden" height="400"> -->
     <v-navigation-drawer v-model="drawer" absolute temporary>
@@ -96,6 +35,7 @@
               </v-list-item>
             </router-link>
           </template>
+
           <template v-if="authenticated">
             <template v-if="user.role == 0">
               <router-link to="juri">
@@ -118,7 +58,7 @@
                 <v-list-item>
                   <v-list-item-icon>
                     <v-icon>mdi-read</v-icon>
-                     </v-list-item-icon>
+                  </v-list-item-icon>
                   <v-list-item-title>Report</v-list-item-title>
                 </v-list-item>
               </router-link>
@@ -131,30 +71,47 @@
                 </v-list-item>
               </router-link>
             </template>
+            <template v-if="user.role == 1">
+              <router-link to="datapeserta">
+                <v-list-item>
+                  <v-list-item-icon><v-icon>mdi-account</v-icon></v-list-item-icon>
+                  <v-list-item-title>Data Peserta</v-list-item-title>
+                </v-list-item>
+              </router-link>
+            </template>
             <template v-if="user.role == 2">
               <router-link to="votejuri">
                 <v-list-item>
                   <v-list-item-icon>
-                    <v-icon>mdi-edit</v-icon>
+
                   </v-list-item-icon>
                   <v-list-item-title>Vote Peserta</v-list-item-title>
                 </v-list-item>
               </router-link>
             </template>
-            <template v-if="user.role == 1">
-              <router-link to="datapeserta">
-                <v-list-item>
-                  <v-list-item-icon> mdi-account</v-list-item-icon>
-                  <v-list-item-title>Data Peserta</v-list-item-title>
-                </v-list-item>
-              </router-link>
-            </template>
+            <router-link to="dashboard">
+              <v-list-item >
+                <v-list-item-icon>
+                  <v-icon>mdi-home</v-icon>
+                </v-list-item-icon>
+                <v-list-item-title>Home</v-list-item-title>
+              </v-list-item>
+            </router-link>
+            <router-link to="/">
+              <v-list-item @click.prevent="signOut" v-show="btnSignout">
+                <v-list-item-icon>
+                  <v-icon>mdi-logout</v-icon>
+                </v-list-item-icon>
+                <v-list-item-title>Sign Out</v-list-item-title>
+              </v-list-item>
+            </router-link>
+
           </template>
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
     <!-- </v-card> -->
-    <Loader></Loader>
+
   </div>
 </template>
 

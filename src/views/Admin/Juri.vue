@@ -10,6 +10,7 @@
     :hide-default-footer="true"
     disable-pagination="true"
     >
+    <Loader></Loader>
 
     <template v-slot:top>
       <v-toolbar flat color="white">
@@ -100,9 +101,12 @@
 
 <script>
 import axios from 'axios'
+import Loader from "../../components/_loader"
+import TheNavigation from '../../components/TheNavigation'
 
 export default {
   name: 'juri',
+  components:{Loader},
   data () {
     return {
       hasSaved: false,
@@ -138,6 +142,37 @@ export default {
       console.log(e.response.data.error)
       alert(e + '\n' +e.response.data.error)
     }
+  },
+  created() {
+    axios.interceptors.request.use(
+      config => {
+        // Do something before request is sent
+        this.$store.commit("LOADER", true);
+        return config;
+      },
+      error => {
+        // Do something with request error
+        this.$store.commit("LOADER", false);
+        return Promise.reject(error);
+      }
+    );
+    // Add a response interceptor
+    axios.interceptors.response.use(
+      response => {
+        // Any status code that lie within the range of 2xx cause this function to trigger
+        // Do something with response data
+        this.$store.commit("LOADER", false);
+
+        return response;
+      },
+      error => {
+        // Any status codes that falls outside the range of 2xx cause this function to trigger
+        // Do something with response error
+        this.$store.commit("LOADER", false);
+
+        return Promise.reject(error);
+      }
+    );
   },
 
   methods: {
@@ -197,6 +232,9 @@ export default {
         alert(e + '\n' +e.response.data.error)
         }
       }
+    },
+    created(){
+      this.$emit(`update:layout`, TheNavigation);
     }
   }
 }
