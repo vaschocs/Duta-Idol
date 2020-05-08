@@ -15,7 +15,7 @@
           :chartData="arrJmlVote"
           :options="chartOptions"
           :chart-id="'chartAryCoba'"
-          label="positive"
+          label="Vote"
         ></BarChart>
       </div>
 
