@@ -52,6 +52,9 @@
                             label="Mulai Sesi"
                             v-model="form.tgl_mulai_vote"
                             :time-picker-props="timeProps"
+                            :open-date="new Date()"
+                            :disableDate="disabledDates.from"
+
                             time-format='HH:mm:ss'
                             >
                           <v-spacer></v-spacer>
@@ -164,6 +167,9 @@ export default {
         btnTutup: false,
         idSesiVoteTutup: '',
         jmlTereliminasi: '',
+        disabledDates: {
+          from: new Date(Date.now())
+        }
     }
   },
 
