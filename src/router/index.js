@@ -14,14 +14,23 @@ import DataPeserta from '../views/DataPeserta'
 
 Vue.use(VueRouter)
 
+
 const routes = [{
         path: '/',
         name: 'home',
-        component: Home
+        component: Home,
+        meta: {
+            title: "HOME",
+            icon: "../assets/Untitled-1.png"
+        }
     },
     {
         path: '/votejuri',
         name: 'votejuri',
+        meta: {
+            title: "VOTE JURI",
+            icon: "../assets/Untitled-1.png"
+        },
         component: VoteJuri,
         beforeEnter: (to, from, next) => {
             if (!store.getters['auth/authenticated']) {
@@ -35,6 +44,10 @@ const routes = [{
     {
         path: '/datapeserta',
         name: 'datapeserta',
+        meta: {
+            title: "DATA PESERTA",
+            icon: "../assets/Untitled-1.png"
+        },
         component: DataPeserta,
         beforeEnter: (to, from, next) => {
             if (!store.getters['auth/authenticated']) {
@@ -48,11 +61,19 @@ const routes = [{
     {
         path: '/signin',
         name: 'signin',
-        component: SignIn
+        component: SignIn,
+        meta: {
+            title: "LOGIN",
+            icon: "/lock.png"
+        }
     },
     {
         path: '/sesi',
         name: 'sesi',
+        meta: {
+            title: "SESI",
+            icon: "../assets/Untitled-1.png"
+        },
         component: Sesi,
         beforeEnter: (to, from, next) => {
             if (!store.getters['auth/authenticated']) {
@@ -66,6 +87,10 @@ const routes = [{
     {
         path: '/juri',
         name: 'juri',
+        meta: {
+            title: "JURI",
+            icon: "../assets/Untitled-1.png"
+        },
         component: Juri,
         beforeEnter: (to, from, next) => {
             if (!store.getters['auth/authenticated']) {
@@ -79,6 +104,10 @@ const routes = [{
     {
         path: '/peserta',
         name: 'peserta',
+        meta: {
+            title: "PESERTA",
+            icon: "../assets/Untitled-1.png"
+        },
         component: Peserta,
         beforeEnter: (to, from, next) => {
             if (!store.getters['auth/authenticated']) {
@@ -92,6 +121,10 @@ const routes = [{
     {
         path: '/dashboard',
         name: 'dashboard',
+        meta: {
+            title: "DASHBOARD",
+            icon: "../assets/Untitled-1.png"
+        },
         component: Dashboard,
         beforeEnter: (to, from, next) => {
             if (!store.getters['auth/authenticated']) {
@@ -105,6 +138,10 @@ const routes = [{
     {
         path: '/report',
         name: 'report',
+        meta: {
+            title: "REPORT",
+            icon: "../assets/Untitled-1.png"
+        },
         component: Report,
         beforeEnter: (to, from, next) => {
             if (!store.getters['auth/authenticated']) {
@@ -117,6 +154,7 @@ const routes = [{
     }
 
 ]
+
 
 const router = new VueRouter({
     mode: 'history',

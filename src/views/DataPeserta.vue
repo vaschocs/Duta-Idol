@@ -1,6 +1,20 @@
 <template>
-  <v-app>
+  <v-app >
+    <br>
+    <br>
+    <br>
+    <br>
+
+     <v-card
+    class="container"
+    max-width="700"
+
+    outlined
+  >
     <table class="table">
+     <strong> DATA PESERTA</strong>
+     <br>
+     <br>
       <tr>
         <td>ID :</td>
         <td>{{ user.id }}</td>
@@ -98,7 +112,10 @@
         </v-card>
       </v-dialog>
     </v-row>
+     </v-card>
+
   </v-app>
+
 </template>
 
 <script>

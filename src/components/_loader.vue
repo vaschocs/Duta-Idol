@@ -7,8 +7,7 @@
     >
 
       <v-card
-        color="primary"
-        dark
+       color="deep-blue" dense dark
       >
         <v-card-text>
           LOADING

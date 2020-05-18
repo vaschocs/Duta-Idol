@@ -1,18 +1,24 @@
 <template>
   <div id="app">
-    <TheNavigation/>
-
-    <router-view/>
+    <TheNavigation />
+    <router-view />
   </div>
 </template>
 
 <script>
-import TheNavigation from '@/components/TheNavigation'
+import TheNavigation from "@/components/TheNavigation";
 
 export default {
   components: {
-    TheNavigation,
-
+    TheNavigation
+  },
+  watch: {
+    $route(to) {
+      document.title = `SIPOLI - ${to.meta.title}`;
+      const link = document.querySelector("[rel='icon']");
+      link.setAttribute("href", to.meta.icon);
+    }
   }
-}
+};
 </script>
+

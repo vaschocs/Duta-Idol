@@ -26,8 +26,8 @@
           <v-row justify="center">
             <v-dialog v-model="dialog" persistent max-width="600px">
               <template v-slot:activator="{ on }">
-                <v-btn icon color="primary" dark v-on="on">Add Juri
-                  <v-icon>mdi-plus</v-icon>
+                <v-btn icon color="primary" dark v-on="on">Add
+                  <v-icon>mdi-account-plus</v-icon>
                 </v-btn>
               </template>
 

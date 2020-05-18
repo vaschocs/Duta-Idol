@@ -11,10 +11,6 @@ import 'material-design-icons-iconfont/dist/material-design-icons.css'
 import DatetimePicker from 'vuetify-datetime-picker'
 import moment from 'moment'
 
-
-
-
-
 Vue.use(DatetimePicker)
 
 Vue.use(BootstrapVue)
