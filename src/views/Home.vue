@@ -1,7 +1,7 @@
 <template>
   <v-parallax
     dark
-    src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg"
+    src="../assets/fix.jpg"
   >
     <v-row align="center" justify="center">
       <v-col class="text-center" cols="12">

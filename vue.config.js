@@ -3,7 +3,7 @@ module.exports = {
         'vuetify'
     ],
     publicPath:'',
-    devServer: {
-      proxy: 'https://immense-thicket-40687.herokuapp.com'
-    }
+    // devServer: {
+    //   proxy: 'https://immense-thicket-40687.herokuapp.com'
+    // }
 }
