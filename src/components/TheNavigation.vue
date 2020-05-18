@@ -11,7 +11,7 @@
       </v-toolbar-title>
     </v-app-bar>
     <!-- <v-card class="mx-auto overflow-hidden" height="400"> -->
-    <v-navigation-drawer v-model="drawer" absolute temporary>
+    <v-navigation-drawer v-model="drawer" absolute temporary color="deep-purple" dense dark>
       <v-list nav dense>
         <v-list-item-group
           v-model="group"
@@ -110,9 +110,8 @@
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
-    <!-- </v-card> -->
-
   </div>
+
 </template>
 
 <script>
@@ -178,3 +177,4 @@ export default {
   }
 };
 </script>
+

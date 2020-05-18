@@ -1,7 +1,15 @@
 <template>
   <form @submit.prevent="submit">
     <v-app>
-      <v-card>
+      <br>
+      <br>
+      <br>
+      <br>
+      <v-card
+    class="mx-auto"
+    max-width="400"
+    outlined
+  >
         <br />
         <br />
         <h4 align="center">LOGIN</h4>
