@@ -11,7 +11,7 @@
       </v-toolbar-title>
     </v-app-bar>
     <!-- <v-card class="mx-auto overflow-hidden" height="400"> -->
-    <v-navigation-drawer v-model="drawer" absolute temporary color="deep-purple" dense dark >
+    <v-navigation-drawer v-model="drawer" absolute temporary color="deep-purple" dense dark height="100%">
       <v-list nav dense>
         <v-list-item-group
           v-model="group"

@@ -3,7 +3,7 @@
  <TheNavigation />
 
     <v-parallax
-    height=750
+    height="100%"
     src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg"
   >
 
