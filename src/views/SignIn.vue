@@ -1,6 +1,7 @@
 <template>
-  <form @submit.prevent="submit">
-    <v-app>
+  <form @submit.prevent="submit" >
+    <div>
+    <v-app  class='transparent'>
       <br>
       <br>
       <br>
@@ -136,6 +137,7 @@
         <Loader></Loader>
       </v-card>
     </v-app>
+    </div>
   </form>
 </template>
 
@@ -155,6 +157,7 @@ export default {
       },
       show: false,
       show1: false,
+
       emailRules: [
         v => !!v || "E-mail is required",
         v => /.+@.+\..+/.test(v) || "E-mail must be valid"
@@ -226,3 +229,11 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.transparent {
+   background-color:transparent;
+   opacity: 100;
+   border-color: transparent!important;
+ }
+</style>

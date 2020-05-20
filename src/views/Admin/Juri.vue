@@ -13,7 +13,7 @@
     <Loader></Loader>
 
     <template v-slot:top>
-      <v-toolbar flat color="white">
+      <v-toolbar flat color="black">
         <!-- untuk search -->
         <v-text-field
             v-model="search"

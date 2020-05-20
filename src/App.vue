@@ -1,7 +1,14 @@
 <template>
   <div id="app">
-    <TheNavigation />
-    <router-view />
+ <TheNavigation />
+
+    <v-parallax
+    height=750
+    src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg"
+  >
+
+  <router-view />
+    </v-parallax>
   </div>
 </template>
 
