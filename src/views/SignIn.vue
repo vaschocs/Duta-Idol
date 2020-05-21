@@ -232,7 +232,7 @@ export default {
 
 <style lang="scss" scoped>
 .transparent {
-   background-color:transparent;
+   background-color:transparent!important;
    opacity: 100;
    border-color: transparent!important;
  }
