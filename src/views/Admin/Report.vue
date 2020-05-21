@@ -1,4 +1,9 @@
 <template>
+    <v-parallax
+    height=1200
+    src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg"
+  >
+
     <v-row>
       <div class="container">
         <b-dropdown id="dropdown-1" text="Sesi Votes" class="m-md-2">
@@ -9,6 +14,9 @@
           >{{sesi.ket_sesi}}</b-dropdown-item>
         </b-dropdown>
       </div>
+      <!-- <div class='jumbotron' v-show="tron">
+
+        </div> -->
       <div class="container">
         <BarChart
           v-if="arrJmlVote.length > 0"
@@ -35,6 +43,7 @@
         <v-btn @click="download">Download PDF</v-btn>
       </div>
   </v-row>
+  </v-parallax>
 </template>
 
 <script>
@@ -45,6 +54,7 @@ export default {
   name: "report",
   data() {
     return {
+      tron:true,
       sesis: [],
       arrName: [],
       arrJmlVote: [],
@@ -110,6 +120,7 @@ export default {
       this.sesiUtkReport='';
       this.created(sesi.id_sesi_vote);
       this.sesiUtkReport=sesi.ket_sesi;
+
     },
     async created(sesi) {
       this.arrJmlVote = [];
@@ -123,7 +134,9 @@ export default {
         // this.arrName.push({id_user, total :name});
         this.arrJmlVote.push({ name, total: jumlah_vote });
       });
+      this.tron=false
     }
+
   },
 
   components: {
@@ -131,3 +144,10 @@ export default {
   }
 };
 </script>
+
+<style>
+.jumbotron{
+  min-height: 1000px;
+  background-color: transparent!important;
+}
+</style>

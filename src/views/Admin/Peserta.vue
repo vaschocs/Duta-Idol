@@ -20,7 +20,7 @@
             single-line
             hide-details
           ></v-text-field>
-        <v-row justify="center">
+        <v-row justify="center" v-show="show2">
         <v-dialog v-model="dialog" persistent max-width="600px">
           <template v-slot:activator="{ on }">
             <v-btn icon color="primary" dark v-on="on">Add
@@ -29,7 +29,7 @@
           </template>
 
           <v-card>
-            <form @submit.prevent="save">
+            <form @submit.prevent="save" >
             <v-card-title>
               <span class="headline">Registrasi Peserta</span>
             </v-card-title>
@@ -99,9 +99,11 @@ export default {
     return {
       hasSaved: false,
       dialog: false,
+      status:'',
       users: [],
       show: false,
       show1: false,
+      show2: false,
       updateSubmit: false,
       headers: [
         { text: 'Name', value: 'name' },
@@ -127,11 +129,18 @@ export default {
     try{
       const response = await axios.get('peserta/getAll')
       this.users = response.data.user
+      const response2 = await axios.get('lastSesi')
+    this.status = response2.data.sesi
+
+    if(this.status==null){
+      this.show2=true
+    }
     }catch(e){
       console.log(e)
       console.log(e.response.data.error)
       alert(e + '\n' +e.response.data.error)
     }
+
 
   },
   methods: {

@@ -83,7 +83,7 @@
               <router-link to="votejuri">
                 <v-list-item>
                   <v-list-item-icon>
-
+<v-icon>mdi-account</v-icon>
                   </v-list-item-icon>
                   <v-list-item-title>Vote Peserta</v-list-item-title>
                 </v-list-item>

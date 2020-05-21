@@ -1,5 +1,5 @@
 <template>
-  <v-app >
+  <v-app class='transparent'>
     <br>
     <br>
     <br>
@@ -8,10 +8,9 @@
      <v-card
     class="container"
     max-width="700"
-
     outlined
   >
-    <table class="table">
+    <table class="table" >
      <strong> DATA PESERTA</strong>
      <br>
      <br>
@@ -196,3 +195,16 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.transparent {
+   background-color:transparent!important;
+   opacity: 100;
+   border-color: transparent!important;
+ }
+
+table{
+  color: white;
+}
+</style>
+

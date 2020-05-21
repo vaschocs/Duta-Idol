@@ -37,7 +37,7 @@
                 ></v-text-field>
               </v-col>
 
-              <v-row justify="center">
+              <v-row justify="center" v-show="show2">
                 <v-dialog v-model="dialog" persistent max-width="600px">
                   <template v-slot:activator="{ on }">
                     <b-link dark v-on="on"
@@ -151,6 +151,8 @@ export default {
   components: {Loader},
   data() {
     return {
+      status:"",
+      show2:false,
       form: {
         email: "",
         password: "",
@@ -196,6 +198,15 @@ export default {
 
         return Promise.reject(error);
       });
+  },
+
+  async mounted(){
+    const response = await axios.get('lastSesi')
+    this.status = response.data.sesi
+
+    if(this.status==null){
+      this.show2=true
+    }
   },
   methods: {
     ...mapActions({

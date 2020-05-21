@@ -1,26 +1,44 @@
 <template>
-  <v-card>
-    <v-card-text>
+<v-parallax
+    height=1000
+    src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg"
+  >
+
+
       <v-row flat v-if="statusVote">
         <v-col cols="12" sm="2" v-for="user in users" :key="user.id">
-          <v-card color="#285F72" dark>
+          <!-- <v-card color="#285F72" dark>
             <v-card-title class="headline">{{user.name}}</v-card-title>
             <v-card-actions>
               <v-btn text v-on:click="vote(user)">VOTE</v-btn>
             </v-card-actions>
-          </v-card>
+          </v-card> -->
+          <v-card color="deep-white" dark>
+                  <v-card-title class="headline">{{ user.name }}</v-card-title>
+                  <v-divider class="mx-12"></v-divider>
+
+                  <v-card-actions>
+                    <v-btn text v-on:click="vote(user)">
+                      <v-btn icon>
+                        <v-icon>mdi-heart</v-icon>
+                      </v-btn>
+                      VOTE</v-btn
+                    >
+                  </v-card-actions>
+                </v-card>
         </v-col>
       </v-row>
-      <v-row flat v-if="!statusVote">
-          <v-col>
-            <div class="container" align='center'>
+      <v-row flat v-if="!statusVote" >
+          <v-col >
+            <div class="container" align='center' >
               <H1>Anda tidak sedang berada dalam sesi Vote</H1><br>
               <b-img :src="require('../assets/Untitled-1.png')" fluid alt="Responsive image"></b-img>
             </div>
           </v-col>
       </v-row>
-    </v-card-text>
-  </v-card>
+
+
+</v-parallax>
 </template>
 <script>
 import axios from 'axios'
@@ -74,3 +92,12 @@ export default {
   }
 }
 </script>
+
+
+<style lang="scss" scoped>
+.transparent {
+   background-color:transparent!important;
+
+   border-color: transparent!important;
+ }
+</style>
