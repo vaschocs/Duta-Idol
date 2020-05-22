@@ -9,7 +9,22 @@
 
   <router-view />
     </v-parallax>
+      <v-card height="50">
+    <v-footer
+    dark
+      absolute
+      class="font-weight-medium"
+    >
+      <v-col
+        class="text-center"
+        cols="12"
+      >
+        &copy; 2020 — <strong>Nikolaus Aryawan Ravato Wijaya - Eva Kristina</strong>
+      </v-col>
+    </v-footer>
+  </v-card>
   </div>
+
 </template>
 
 <script>
