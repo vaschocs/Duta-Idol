@@ -40,22 +40,26 @@
                     <v-container>
                       <v-row>
                         <v-col cols="12" sm="6" md="4">
-                          <v-text-field label="Name*" required v-model="form.name"></v-text-field>
+                          <v-text-field label="Name*" required v-model="form.name"
+                          :rules="[rulespass.required]"></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                          <v-text-field label="Email*" required v-model="form.email"></v-text-field>
+                          <v-text-field label="Email*" required v-model="form.email"
+                          :rules="emailRules"></v-text-field>
                         </v-col>
                         <v-col cols="12">
                           <v-text-field label="Password*" required v-model="form.password"
                           :type="show ? 'text' : 'password'"
                           :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
-                          @click:append="show = !show"></v-text-field>
+                          @click:append="show = !show"
+                          :rules="[rulespass.required,rulespass.min]"></v-text-field>
                         </v-col>
                         <v-col cols="12">
                           <v-text-field label="Confirmation Password*" required v-model="form.password_confirmation"
                           :type="show1 ? 'text' : 'password'"
                           :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-                          @click:append="show1 = !show1"></v-text-field>
+                          @click:append="show1 = !show1"
+                           :rules="[rulespass.required]"></v-text-field>
                         </v-col>
                         <v-col cols="12" sm="6">
                           <v-select
@@ -63,6 +67,7 @@
                             label="Status*"
                             required
                             v-model="form.status"
+                             :rules="[general.required]"
                           ></v-select>
                         </v-col>
                       </v-row>
@@ -129,7 +134,18 @@ export default {
           password_confirmation: '',
           status: ''
         },
-      updateSubmit: false
+      updateSubmit: false,
+      general: {
+        required: value => !!value || "Required."
+      },
+       emailRules: [
+        v => !!v || "E-mail is required",
+        v => /.+@.+\..+/.test(v) || "E-mail must be valid"
+      ],
+       rulespass: {
+        required: value => !!value || "Required.",
+        min: v => v.length >= 8 || "Min 8 characters"
+      },
     }
   },
 
