@@ -39,38 +39,47 @@
                         <v-col cols="12" sm="6" md="4">
                           <v-text-field
                             label="Name*"
-                            required
                             v-model="form.name"
-                            :rules="[rulespass.required]"
+                            required
+                          :error-messages="nameErrors"
+                          @input="$v.form.name.$touch()"
+                          @blur="$v.form.name.$touch()"
                           ></v-text-field>
                         </v-col>
                         <v-col cols="12">
                           <v-text-field
                             label="Email*"
-                            required
                             v-model="form.email"
-                            :rules="emailRules"
+                            required
+                          :error-messages="emailErrors"
+                          @input="$v.form.email.$touch()"
+                          @blur="$v.form.email.$touch()"
                           ></v-text-field>
                         </v-col>
                         <v-col cols="12">
                           <v-text-field
                             label="Password*"
-                            required
                             v-model="form.password"
                             :type="show ? 'text' : 'password'"
                             :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
                             @click:append="show = !show"
-                            :rules="[rulespass.required, rulespass.min]"
+                             required
+                          :error-messages="passwordErrors"
+                          @input="$v.form.password.$touch()"
+                          @blur="$v.form.password.$touch()"
                           ></v-text-field>
                         </v-col>
                         <v-col cols="12">
                           <v-text-field
                             label="Confirmation Password*"
-                            required
                             v-model="form.password_confirmation"
                             :type="show1 ? 'text' : 'password'"
                             :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
                             @click:append="show1 = !show1"
+                            required
+                          :error-messages="password_confirmationErrors"
+                          @input="$v.form.password_confirmation.$touch()"
+                          @blur="$v.form.password_confirmation.$touch()"
                           ></v-text-field>
                         </v-col>
                       </v-row>
@@ -87,7 +96,6 @@
                       type="submit"
                       v-show="!updateSubmit"
                       text
-                      @click="dialog = false"
                       >Save</v-btn
                     >
                     <v-btn
@@ -95,7 +103,6 @@
                       v-show="updateSubmit"
                       v-on:click="update(form)"
                       text
-                      @click="dialog = false"
                       >Update</v-btn
                     >
                   </v-card-actions>
@@ -119,8 +126,20 @@
 
 <script>
 import axios from "axios";
+import { validationMixin } from 'vuelidate'
+import { required, maxLength,minLength , email, sameAs } from 'vuelidate/lib/validators'
 
 export default {
+  mixins: [validationMixin],
+
+  validations: {
+    form:{
+      name: { required, maxLength: maxLength(30) },
+      email: { required, email },
+      password: { required, minLength: minLength(8)},
+      password_confirmation: { required, minLength: minLength(8),sameAs: sameAs("password") },
+    }
+  },
   name: "peserta",
   data() {
     return {
@@ -145,14 +164,6 @@ export default {
         password: "",
         password_confirmation: ""
       },
-      emailRules: [
-        v => !!v || "E-mail is required",
-        v => /.+@.+\..+/.test(v) || "E-mail must be valid"
-      ],
-      rulespass: {
-        required: value => !!value || "Required.",
-        min: v => v.length >= 8 || "Min 8 characters"
-      }
     };
   },
   async mounted() {
@@ -171,9 +182,43 @@ export default {
       alert(e + "\n" + e.response.data.error);
     }
   },
+  computed: {
+      nameErrors () {
+       const errors = []
+        if (!this.$v.form.name.$dirty) return errors
+        !this.$v.form.name.maxLength && errors.push('Name must be at most 30 characters long')
+        !this.$v.form.name.required && errors.push('Name is required.')
+        return errors
+      },
+      emailErrors () {
+        const errors = []
+        if (!this.$v.form.email.$dirty) return errors
+        !this.$v.form.email.email && errors.push('Must be valid e-mail')
+        !this.$v.form.email.required && errors.push('E-mail is required')
+        return errors
+      },
+      passwordErrors () {
+        const errors = []
+        if (!this.$v.form.password.$dirty) return errors
+        !this.$v.form.password.minLength && errors.push('Password must be at least 8 characters')
+        !this.$v.form.password.required && errors.push('Password is required')
+        return errors
+      },
+      password_confirmationErrors () {
+        const errors = []
+        if (!this.$v.form.password_confirmation.$dirty) return errors
+        !this.$v.form.password_confirmation.minLength && errors.push('password confirmation must be at least 8 characters')
+        !this.$v.form.password_confirmation.sameAs && errors.push('password is not match')
+        !this.$v.form.password_confirmation.required && errors.push('Password confirmation is required')
+        return errors
+      },
+  },
   methods: {
     async save() {
+      this.$v.$touch()
+      if(this.$v.$error) return //APABILA ERROR MAKA STOP
       try {
+        this.dialog=false;
         await axios.post("registerPeserta", this.form);
         this.name = "";
         this.email = "";
@@ -200,7 +245,9 @@ export default {
       }
     },
     async update(form) {
+      if(this.$v.$error) return //APABILA ERROR MAKA STOP
       try {
+        this.dialog=false;
         await axios.post("pesertaEdit/" + form.id, this.form);
         this.name = "";
         this.email = "";

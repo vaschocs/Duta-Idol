@@ -10,6 +10,9 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
 import DatetimePicker from 'vuetify-datetime-picker'
 import moment from 'moment'
+import Vuelidate from 'vuelidate'
+
+Vue.use(Vuelidate)
 
 Vue.use(DatetimePicker)
 
@@ -19,8 +22,8 @@ Vue.use(IconsPlugin)
 
 require('@/store/subscriber')
 
-// axios.defaults.baseURL = 'http://localhost:8000/api'
-axios.defaults.baseURL = 'https://immense-thicket-40687.herokuapp.com/api'
+axios.defaults.baseURL = 'http://localhost:8000/api'
+// axios.defaults.baseURL = 'https://immense-thicket-40687.herokuapp.com/api'
     // axios.defaults.baseURL = 'https://sipoli-f0ccc.web.app/api'
     // axios.defaults.baseURL = 'https://immense-thicket-40687.herokuapp.com/api'
 

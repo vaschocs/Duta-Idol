@@ -42,9 +42,11 @@
                         <v-col cols="12" sm="6" md="4">
                           <v-text-field
                             label="Keterangan Sesi*"
-                            required
                             v-model="form.ket_sesi"
-                            :rules="[general.required]"
+                             required
+                          :error-messages="sesiErrors"
+                          @input="$v.form.ket_sesi.$touch()"
+                          @blur="$v.form.ket_sesi.$touch()"
                           ></v-text-field>
                         </v-col>
                         <v-col cols="11" sm="5">
@@ -52,10 +54,11 @@
                             label="Mulai Sesi*"
                             v-model="form.tgl_mulai_vote"
                             :time-picker-props="timeProps"
-                            :open-date="new Date()"
-                            :disableDate="disabledDates.from"
-                            :rules="[general.required]"
                             time-format="HH:mm:ss"
+                            required
+                          :error-messages="tgl_mulai_voteErrors"
+                          @input="$v.form.tgl_mulai_vote.$touch()"
+                          @blur="$v.form.tgl_mulai_vote.$touch()"
                           >
                             <v-spacer></v-spacer>
                             <v-btn text color="primary" @click="modal2 = false"
@@ -75,8 +78,10 @@
                             v-model="form.tgl_akhir_vote"
                             :time-picker-props="timeProps"
                             time-format="HH:mm:ss"
-                            :min="minDate"
-                            :rules="[general.required]"
+                            required
+                          :error-messages="tgl_akhir_voteErrors"
+                          @input="$v.form.tgl_akhir_vote.$touch()"
+                          @blur="$v.form.tgl_akhir_vote.$touch()"
                           >
                             <v-spacer></v-spacer>
                             <v-btn text color="primary" @click="modal2 = false"
@@ -104,7 +109,6 @@
                       type="submit"
                       v-show="!updateSubmit"
                       text
-                      @click="dialog = false"
                       >Save</v-btn
                     >
                     <v-btn
@@ -112,7 +116,6 @@
                       v-show="updateSubmit"
                       v-on:click="update(form)"
                       text
-                      @click="dialog = false"
                       >Update</v-btn
                     >
                   </v-card-actions>
@@ -150,8 +153,19 @@ import axios from "axios";
 import DatetimePicker from "vuetify-datetime-picker";
 import moment from "moment";
 import Loader from "../../components/_loader";
+import { validationMixin } from 'vuelidate'
+import { required, maxLength} from 'vuelidate/lib/validators'
 
 export default {
+  mixins: [validationMixin],
+
+  validations: {
+    form:{
+      ket_sesi: { required, maxLength: maxLength(30) },
+      tgl_mulai_vote: { required},
+      tgl_akhir_vote: { required},
+    }
+  },
   name: "sesi",
   components: { Loader },
   data() {
@@ -191,10 +205,29 @@ export default {
       btnTutup: false,
       idSesiVoteTutup: "",
       jmlTereliminasi: "",
-      disabledDates: {
-        from: new Date(Date.now())
-      }
+
     };
+  },
+  computed: {
+      sesiErrors () {
+       const errors = []
+        if (!this.$v.form.ket_sesi.$dirty) return errors
+        !this.$v.form.ket_sesi.maxLength && errors.push('Ket sesi most 30 characters long')
+        !this.$v.form.ket_sesi.required && errors.push('Ket sesi is required.')
+        return errors
+      },
+      tgl_mulai_voteErrors () {
+        const errors = []
+        if (!this.$v.form.tgl_mulai_vote.$dirty) return errors
+        !this.$v.form.tgl_mulai_vote.required && errors.push('Tgl mulai sesi is required')
+        return errors
+      },
+      tgl_akhir_voteErrors () {
+        const errors = []
+        if (!this.$v.form.tgl_akhir_vote.$dirty) return errors
+        !this.$v.form.tgl_akhir_vote.required && errors.push('Tgl akhir sesi is required')
+        return errors
+      },
   },
 
   async mounted() {
@@ -253,7 +286,10 @@ export default {
       return moment(date).format("YYYY-MM-DD HH:mm:ss");
     },
     async saveSesi() {
+      this.$v.$touch()
+      if(this.$v.$error) return //APABILA ERROR MAKA STOP
       try {
+        this.dialog=false;
         var obj = {};
         obj.ket_sesi = this.form.ket_sesi;
         obj.tgl_mulai_vote = this.formatDateOutputDatePicker(
@@ -284,8 +320,10 @@ export default {
       }
     },
     async update(form) {
-      console.log(form);
+      this.$v.$touch()
+      if(this.$v.$error) return //APABILA ERROR MAKA STOP
       try {
+        this.dialog=false;
         var obj = {};
         obj.ket_sesi = form.ket_sesi;
         obj.tgl_mulai_vote = this.formatDateOutputDatePicker(
