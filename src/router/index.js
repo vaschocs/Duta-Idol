@@ -10,6 +10,7 @@ import Peserta from '../views/Admin/Peserta.vue'
 import Sesi from '../views/Admin/Sesi.vue'
 import Vue from 'vue'
 import DataPeserta from '../views/DataPeserta'
+import Challenge from '../views/ChallengePakArgo.vue'
 
 
 Vue.use(VueRouter)
@@ -65,6 +66,15 @@ const routes = [{
         meta: {
             title: "LOGIN",
             icon: "/lock.png"
+        }
+    },
+    {
+        path: '/challenge',
+        name: 'challenge',
+        component: Challenge,
+        meta: {
+            title: "Challenge",
+
         }
     },
     {

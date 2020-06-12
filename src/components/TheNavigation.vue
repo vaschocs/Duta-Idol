@@ -34,6 +34,14 @@
                 <v-list-item-title>Signin</v-list-item-title>
               </v-list-item>
             </router-link>
+            <router-link to="challenge">
+              <v-list-item>
+                <v-list-item-icon>
+                  <v-icon>mdi-read</v-icon>
+                </v-list-item-icon>
+                <v-list-item-title>Challenge Pak Argo</v-list-item-title>
+              </v-list-item>
+            </router-link>
           </template>
 
           <template v-if="authenticated">
