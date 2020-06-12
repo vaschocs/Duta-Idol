@@ -37,7 +37,7 @@
             <router-link to="challenge">
               <v-list-item>
                 <v-list-item-icon>
-                  <v-icon>mdi-Read</v-icon>
+                  <v-icon>mdi-read</v-icon>
                 </v-list-item-icon>
                 <v-list-item-title>Challenge Pak Argo</v-list-item-title>
               </v-list-item>

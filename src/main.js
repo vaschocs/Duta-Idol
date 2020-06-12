@@ -22,8 +22,8 @@ Vue.use(IconsPlugin)
 
 require('@/store/subscriber')
 
-axios.defaults.baseURL = 'http://localhost:8000/api'
-// axios.defaults.baseURL = 'https://immense-thicket-40687.herokuapp.com/api'
+// axios.defaults.baseURL = 'http://localhost:8000/api'
+axios.defaults.baseURL = 'https://immense-thicket-40687.herokuapp.com/api'
     // axios.defaults.baseURL = 'https://sipoli-f0ccc.web.app/api'
     // axios.defaults.baseURL = 'https://immense-thicket-40687.herokuapp.com/api'
 

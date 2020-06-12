@@ -1,16 +1,13 @@
 <template>
     <v-parallax
-    height=1200
+    height=750
     src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg"
   >
+<v-row
 
-    <v-row>
-
-
-      <div  ref="content" class="container" v-if="arrJmlVote.length > 0">
         <v-data-table
           :headers="headers"
-          :items="list"
+          :items="lists"
           sort-by="id"
           class="elevation-1"
           :search="search"
@@ -18,14 +15,11 @@
           disable-pagination="true"
         ></v-data-table>
 
-      </div>
-    <div class="container" v-if="arrJmlVote.length > 0">
-        <v-btn @click="download">Download PDF</v-btn>
-      </div>
-  </v-row>
+
+
+</v-row>
   </v-parallax>
 </template>
-
 <script>
 
 import axios from "axios";
@@ -60,9 +54,3 @@ export default {
 };
 </script>
 
-<style>
-.jumbotron{
-  min-height: 1000px;
-  background-color: transparent!important;
-}
-</style>
